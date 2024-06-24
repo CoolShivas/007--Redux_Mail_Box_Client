@@ -1,6 +1,28 @@
+import { useState } from "react";
 
 
 const SignUp = () => {
+
+    const [mail, setMail] = useState("");
+    const [pass, setPass] = useState("");
+    const [cnfPass, setCnfPass] = useState("");
+
+    const handlerOnSubmitSignUpForm = (e) => {
+        // // Preventing the screen from refreshing again and again on Submit;
+        e.preventDefault();
+
+        // // Getting the data on Console Screen;
+        console.log(mail);
+        console.log(pass);
+        console.log(cnfPass);
+
+        // // Clearing the fields;
+        setMail("");
+        setPass("");
+        setCnfPass("");
+    };
+
+
     return (<>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -15,7 +37,7 @@ const SignUp = () => {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST">
+                <form className="space-y-6" onSubmit={handlerOnSubmitSignUpForm}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                             Email address
@@ -25,8 +47,11 @@ const SignUp = () => {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-5"
                                 id="email"
+                                placeholder="enter your email address"
+                                value={mail}
+                                onChange={(e) => { setMail(e.target.value) }}
                             />
                         </div>
                     </div>
@@ -39,8 +64,12 @@ const SignUp = () => {
                             <input
                                 type="password"
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-5"
+                                minLength={6}
                                 id="pass"
+                                placeholder="enter your password"
+                                value={pass}
+                                onChange={(e) => { setPass(e.target.value) }}
                             />
                         </div>
                     </div>
@@ -53,8 +82,12 @@ const SignUp = () => {
                             <input
                                 type="password"
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-5"
+                                minLength={6}
                                 id="cnfpass"
+                                placeholder="enter and confirm your password"
+                                value={cnfPass}
+                                onChange={(e) => { setCnfPass(e.target.value) }}
                             />
                         </div>
                     </div>
