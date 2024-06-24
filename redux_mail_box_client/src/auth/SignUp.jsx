@@ -7,14 +7,43 @@ const SignUp = () => {
     const [pass, setPass] = useState("");
     const [cnfPass, setCnfPass] = useState("");
 
-    const handlerOnSubmitSignUpForm = (e) => {
+    const handlerOnSubmitSignUpForm = async (e) => {
         // // Preventing the screen from refreshing again and again on Submit;
         e.preventDefault();
-
-        // // Getting the data on Console Screen;
         console.log(mail);
         console.log(pass);
         console.log(cnfPass);
+
+        if (pass === cnfPass) {
+            try {
+                if (!mail || !pass || !cnfPass) {
+                    throw new Error("Please fill all the fields for signup");
+                }
+
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBE0s_zEOQLHxzklg47lVyJDi-CIN60n1k`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: mail,
+                        password: pass,
+                        returnSecureToken: true,
+                    }),
+                }
+                );
+
+                const data = await response.json();
+                // console.log(data);
+
+                if (data.error) {
+                    throw new Error("Signup failed: Email already exists");
+                }
+                else {
+                    console.log("User have Successfully SignedUp", data);
+                }
+
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
 
         // // Clearing the fields;
         setMail("");
