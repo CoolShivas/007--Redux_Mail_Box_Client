@@ -6,6 +6,7 @@ const SignUp = () => {
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
     const [cnfPass, setCnfPass] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handlerOnSubmitSignUpForm = async (e) => {
         // // Preventing the screen from refreshing again and again on Submit;
@@ -13,6 +14,8 @@ const SignUp = () => {
         console.log(mail);
         console.log(pass);
         console.log(cnfPass);
+
+        setIsLoading(true);
 
         if (pass === cnfPass) {
             try {
@@ -37,6 +40,7 @@ const SignUp = () => {
                     throw new Error("Signup failed: Email already exists");
                 }
                 else {
+                    setIsLoading(false);
                     console.log("User have Successfully SignedUp", data);
                 }
 
@@ -122,12 +126,13 @@ const SignUp = () => {
                     </div>
 
                     <div>
-                        <button
+
+                        {isLoading ? (<center><p> Loading... </p></center>) : (<button
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                             Sign-Up
-                        </button>
+                        </button>)}
                     </div>
                 </form>
 
