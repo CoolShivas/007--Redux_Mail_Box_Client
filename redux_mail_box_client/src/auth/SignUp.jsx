@@ -1,8 +1,11 @@
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
 
 
 const SignUp = () => {
+
+    const navigate = useHistory();
 
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
@@ -39,11 +42,12 @@ const SignUp = () => {
                 // console.log(data);
 
                 if (data.error) {
-                    throw new Error("Signup failed: Email already exists");
+                    throw new Error("Sign-Up failed: Email already exists");
                 }
                 else {
                     setIsLoading(false);
-                    console.log("User have Successfully SignedUp", data);
+                    console.log("User have Successfully Sign-Up", data);
+                    navigate.push("/");
                 }
 
             } catch (error) {
