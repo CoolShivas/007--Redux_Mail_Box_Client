@@ -39,6 +39,13 @@ const SignIn = () => {
                 else {
                     setIsLoading(false);
                     console.log("User have Successfully Sign-In", data);
+                    // // Saving of token and cleanEmail to get that specific user from the firebase rest api;
+                    localStorage.setItem("MBox-Token", data.idToken);
+
+                    const cleanEmail = data.email.replace(/[@.]/g, "");
+                    console.log(cleanEmail);
+                    localStorage.setItem("MBox-Email", cleanEmail);
+
                 }
 
             } catch (error) {
