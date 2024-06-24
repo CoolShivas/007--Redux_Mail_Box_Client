@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { setIsUserLogIn } from "../store/reduxStore";
+import { formatEmail } from "../config/helpers/helpers";
 
 
 const SignIn = () => {
+
+    const navigate = useHistory();
+    const dispatch = useDispatch();
 
     const [mail, setMail] = useState("");
     const [pass, setPass] = useState("");
@@ -33,20 +39,24 @@ const SignIn = () => {
                 const data = await response.json();
                 // console.log(data);
 
-                if (data.error) {
-                    throw new Error("Sign-In failed : If not have account please signup ");
-                }
-                else {
-                    setIsLoading(false);
-                    console.log("User have Successfully Sign-In", data);
-                    // // Saving of token and cleanEmail to get that specific user from the firebase rest api;
-                    localStorage.setItem("MBox-Token", data.idToken);
+                // if (data.error) {
+                //     throw new Error("Sign-In failed : If not have account please signup ");
+                // }
+                console.log(data)
+                setIsLoading(false);
+                dispatch(setIsUserLogIn());
+                console.log("User have Successfully Sign-In", data);
+                navigate.push("/mainpage");
+                // // Saving of token and cleanEmail to get that specific user from the firebase rest api;
+                localStorage.setItem("MBox-Token", JSON.stringify(data.idToken));
 
-                    const cleanEmail = data.email.replace(/[@.]/g, "");
-                    console.log(cleanEmail);
-                    localStorage.setItem("MBox-Email", cleanEmail);
+                // const cleanEmail = data.email.replace(/[@.]/g, "");
+                // console.log(cleanEmail);
+                const cleanEmail = formatEmail(data.email);
+                console.log(cleanEmail);
+                localStorage.setItem("MBox-Email", JSON.stringify(cleanEmail));
 
-                }
+
 
             } catch (error) {
                 console.log(error.message);
