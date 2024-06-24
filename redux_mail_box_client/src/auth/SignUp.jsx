@@ -7,6 +7,7 @@ const SignUp = () => {
     const [pass, setPass] = useState("");
     const [cnfPass, setCnfPass] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [passError, setPassError] = useState("");
 
     const handlerOnSubmitSignUpForm = async (e) => {
         // // Preventing the screen from refreshing again and again on Submit;
@@ -47,6 +48,9 @@ const SignUp = () => {
             } catch (error) {
                 console.log(error.message);
             }
+        }
+        else {
+            setPassError("Passwords do not match");
         }
 
         // // Clearing the fields;
@@ -126,8 +130,9 @@ const SignUp = () => {
                     </div>
 
                     <div>
+                        {passError && <center><p className="text-red-500 font-bold mb-3"> {passError} </p></center>}
 
-                        {isLoading ? (<center><p> Loading... </p></center>) : (<button
+                        {isLoading ? (<center><p className="font-bold bg-blue-200 py-2"> Loading... </p></center>) : (<button
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
@@ -136,7 +141,7 @@ const SignUp = () => {
                     </div>
                 </form>
 
-                <p className="mt-10 text-center text-sm text-gray-500">
+                <p className="mt-10 text-center text-md text-gray-500">
                     Already have an account!{' '}
                     <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                         Sign-In
