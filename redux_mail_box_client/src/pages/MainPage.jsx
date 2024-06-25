@@ -21,7 +21,6 @@ const MainPage = () => {
         navigate.replace("/");
     };
 
-
     return (<>
         <div className="flex flex-col h-screen">
             <div className="fixed top-0 left-0 right-0 bg-green-100 shadow-lg border-b-8 border-blue-900 p-4 z-50">
