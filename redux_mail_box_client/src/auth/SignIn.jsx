@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { setIsUserLogIn } from "../store/reduxStore";
+import { setIsUserLogIn, setLogIn } from "../store/reduxStore";
 import { formatEmail } from "../config/helpers/helpers";
 
 
@@ -44,7 +44,13 @@ const SignIn = () => {
                 // }
                 console.log(data)
                 setIsLoading(false);
-                dispatch(setIsUserLogIn());
+                // dispatch(setIsUserLogIn());
+                dispatch(setLogIn({
+                    isUserLogIn: true,
+                    userToken: data.idToken,
+                    userIdentity: data.email
+                }));
+
                 console.log("User have Successfully Sign-In", data);
                 navigate.push("/mainpage");
                 // // Saving of token and cleanEmail to get that specific user from the firebase rest api;
@@ -52,6 +58,7 @@ const SignIn = () => {
 
                 // const cleanEmail = data.email.replace(/[@.]/g, "");
                 // console.log(cleanEmail);
+                // // Here, the above cleanEmail function is made or written in the helpers.js file where all the functions are declared there with argument and wherever you can call the function and pass the parameters we will get the results;
                 const cleanEmail = formatEmail(data.email);
                 console.log(cleanEmail);
                 localStorage.setItem("MBox-Email", JSON.stringify(cleanEmail));

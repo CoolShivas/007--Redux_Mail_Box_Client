@@ -1,7 +1,23 @@
 import { FaPencilAlt } from "react-icons/fa";
 import React from 'react'
+import { useDispatch } from "react-redux";
+import { setLogOut } from "../store/reduxStore";
 
 const MainPage = () => {
+
+    const dispatch = useDispatch();
+
+    const handlerOnLogOut = () => {
+        localStorage.removeItem("MBox-Token");
+        localStorage.removeItem("MBox-Email");
+        dispatch(setLogOut({
+            isUserLogIn: false,
+            userToken: "",
+            userIdentity: null,
+        }));
+    };
+
+
     return (<>
         <div className="flex flex-col h-screen">
             <div className="fixed top-0 left-0 right-0 bg-green-100 shadow-lg border-b-8 border-blue-900 p-4 z-50">
@@ -11,6 +27,7 @@ const MainPage = () => {
                     </header>
                     <button
                         className="bg-yellow-300 hover:bg-[#fb7185] hover:text-white rounded-3xl p-4 font-semibold shadow-lg"
+                        onClick={handlerOnLogOut}
                     >
                         Logout
                     </button>
