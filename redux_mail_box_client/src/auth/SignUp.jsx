@@ -39,16 +39,12 @@ const SignUp = () => {
                 );
 
                 const data = await response.json();
-                // console.log(data);
+                console.log(data);
 
-                if (data.error) {
-                    throw new Error("Sign-Up failed: Email already exists");
-                }
-                else {
-                    setIsLoading(false);
-                    console.log("User have Successfully Sign-Up", data);
-                    navigate.push("/");
-                }
+                setIsLoading(false);
+                console.log("User have Successfully Sign-Up", data);
+                navigate.push("/");
+
 
             } catch (error) {
                 console.log(error.message);

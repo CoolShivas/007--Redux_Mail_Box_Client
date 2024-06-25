@@ -1,9 +1,12 @@
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaPencilAlt } from "react-icons/fa";
 import React from 'react'
 import { useDispatch } from "react-redux";
 import { setLogOut } from "../store/reduxStore";
 
 const MainPage = () => {
+
+    const navigate = useHistory();
 
     const dispatch = useDispatch();
 
@@ -15,6 +18,7 @@ const MainPage = () => {
             userToken: "",
             userIdentity: null,
         }));
+        navigate.replace("/");
     };
 
 

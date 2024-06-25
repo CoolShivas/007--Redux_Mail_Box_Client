@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { setIsUserLogIn, setLogIn } from "../store/reduxStore";
+import { setLogIn } from "../store/reduxStore";
 import { formatEmail } from "../config/helpers/helpers";
 
 
@@ -44,7 +44,6 @@ const SignIn = () => {
                 // }
                 console.log(data)
                 setIsLoading(false);
-                // dispatch(setIsUserLogIn());
                 dispatch(setLogIn({
                     isUserLogIn: true,
                     userToken: data.idToken,
