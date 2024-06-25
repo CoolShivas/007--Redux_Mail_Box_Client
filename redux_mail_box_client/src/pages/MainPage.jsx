@@ -6,6 +6,9 @@ import { setLogOut } from "../store/reduxStore";
 
 const MainPage = () => {
 
+    const userEmail = JSON.parse(localStorage.getItem("MBox-Email"))
+    console.log(userEmail);
+
     const navigate = useHistory();
 
     const dispatch = useDispatch();
@@ -27,6 +30,8 @@ const MainPage = () => {
                 <div className="flex justify-between items-center h-20">
                     <header className="font-bold text-red-950 text-3xl uppercase">
                         Welcome to MailBOX
+                        <span className="text-base flex justify-center bg-orange-300 p-2 rounded"
+                        > {userEmail} </span>
                     </header>
                     <button
                         className="bg-yellow-300 hover:bg-[#fb7185] hover:text-white rounded-3xl p-4 font-semibold shadow-lg"
