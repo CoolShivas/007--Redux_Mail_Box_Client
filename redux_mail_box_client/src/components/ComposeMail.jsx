@@ -1,29 +1,95 @@
+import { sendingMails } from "../store/reduxStore";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
+import { formatEmail } from "../config/helpers/helpers";
+import { useDispatch } from "react-redux";
+
 
 
 const ComposeMail = () => {
+
+    const dispatch = useDispatch();
 
     const [to, setTo] = useState("");
     const [subject, setSubject] = useState("");
     const [contentBox, setContentBox] = useState("");
 
-    const handlerOnSubmitCompose = (e) => {
+    const handlerOnSubmitCompose = async (e) => {
         e.preventDefault();
 
         const sendComposeData = {
-            Email: to,
-            Subject: subject,
-            ContentBox: contentBox,
+            to: to,
+            subject: subject,
+            contentBox: contentBox,
         };
         console.log(sendComposeData);
+
+        // // Getting the email address from the localStroage to confirm who is sending mail to whom;
+        const senderEmail = JSON.parse(localStorage.getItem("MBox-Email"));
+        console.log(senderEmail);
+
+        // // Here, with the help of formatEmail function we are able to clean email address i.e, already written in the helpers file;
+        const receiverCleanEmail = formatEmail(to);
+        console.log(receiverCleanEmail);
+
+        try {
+            const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`, {
+                method: "POST",
+                body: JSON.stringify({ sendComposeData })
+            });
+
+            const data = await response.json();
+
+
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            console.log("Email send successfully", response);
+            dispatch(sendingMails({
+                mails: data,
+                receiversId: to,
+            }));
+
+
+        } catch (error) {
+            console.log(error.message);
+        }
+
+        try {
+            const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${receiverCleanEmail}/inbox.json`, {
+                method: "POST",
+                body: JSON.stringify({ sendComposeData })
+            });
+
+            const data = await response.json();
+
+
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            console.log("Email send successfully", response);
+            dispatch(sendingMails({
+                mails: data,
+                receiversId: to,
+            }));
+
+        } catch (error) {
+            console.log(error.message);
+        }
+
+
+
+
+        setTo("");
+        setSubject("");
+        setContentBox("");
     };
 
     return (
         <div>
-            <div className="m-5 p-4 w-5/6 float-right bg-[#8b5cf6] rounded-2xl">
+            <div className="m-5 p-4 w-5/6 float-right bg-[#c4b4eb] rounded-2xl">
                 <form onSubmit={handlerOnSubmitCompose}>
 
                     <div className="p-4 w-full">

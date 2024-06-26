@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+// // Starting of Authentication Slice and Reducer Function-----------------------------------------------
 const INITIAL_AUTH = {
   isUserLogIn: false,
   userToken: "",
@@ -25,13 +26,41 @@ const authSlice = createSlice({
     },
   },
 });
+// // Ending of Authentication Slice and Reducer Function-----------------------------------------------
 
-const reduxStore = configureStore({
-  reducer: {
-    authentication: authSlice.reducer,
+// // Starting of All Mails Slice and Reducer Function-----------------------------------------------
+const INITIAL_All_MAILS = {
+  mails: [],
+  receiversId: null,
+};
+
+const mailsSlice = createSlice({
+  name: "allMails",
+  initialState: INITIAL_All_MAILS,
+  reducers: {
+    sendingMails: (state, action) => {
+      state.mails = action.payload.mails;
+      state.receiversId = action.payload.receiversId;
+    },
   },
 });
 
-export const { setLogIn, setLogOut } = authSlice.actions;
+// // Ending of All Mails Slice and Reducer Function-----------------------------------------------
 
+// // Starting of Redux Store with Reducers-----------------------------------------------
+const reduxStore = configureStore({
+  reducer: {
+    authentication: authSlice.reducer,
+    electronicMails: mailsSlice.reducer,
+  },
+});
+// // Ending of Redux Store with Reducers-----------------------------------------------
+
+// // Starting of Authentication Actions Function-----------------------------------------------
+export const { setLogIn, setLogOut } = authSlice.actions;
+// // Ending of Authentication Actions Function-----------------------------------------------
+
+// // Starting of Authentication Actions Function-----------------------------------------------
+export const { sendingMails } = mailsSlice.actions;
+// // Ending of Authentication Actions Function-----------------------------------------------
 export default reduxStore;
