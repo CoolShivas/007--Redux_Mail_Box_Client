@@ -16,7 +16,7 @@ function App() {
 
   // // Here, getting the token for sticking on that particular page with the help of LS token ;
   // // Means after refreshing the page we are able to see that particular page only;
-  const localToken = JSON.parse(localStorage.getItem("MBox-Token"));
+  const localToken = localStorage.getItem("MBox-Token");
 
   useEffect(() => {
     if (localToken) {

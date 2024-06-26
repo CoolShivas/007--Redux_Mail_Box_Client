@@ -27,7 +27,7 @@ const ComposeMail = () => {
         console.log(sendComposeData);
 
         // // Getting the email address from the localStroage to confirm who is sending mail to whom;
-        const senderEmail = JSON.parse(localStorage.getItem("MBox-Email"));
+        const senderEmail = localStorage.getItem("MBox-Email");
         console.log(senderEmail);
 
         // // Here, with the help of formatEmail function we are able to clean email address i.e, already written in the helpers file;
@@ -37,7 +37,7 @@ const ComposeMail = () => {
         try {
             const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`, {
                 method: "POST",
-                body: JSON.stringify({ sendComposeData })
+                body: JSON.stringify(sendComposeData)
             });
 
             const data = await response.json();
@@ -60,7 +60,7 @@ const ComposeMail = () => {
         try {
             const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${receiverCleanEmail}/inbox.json`, {
                 method: "POST",
-                body: JSON.stringify({ sendComposeData })
+                body: JSON.stringify(sendComposeData)
             });
 
             const data = await response.json();

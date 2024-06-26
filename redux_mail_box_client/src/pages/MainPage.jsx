@@ -1,3 +1,4 @@
+import Inbox from "../components/Inbox";
 import { GrSend } from "react-icons/gr";
 import { FaEnvelopeOpenText } from "react-icons/fa";
 import ComposeMail from "../components/ComposeMail";
@@ -11,7 +12,7 @@ import { setLogOut } from "../store/reduxStore";
 
 const MainPage = () => {
 
-    const userEmail = JSON.parse(localStorage.getItem("MBox-Email"))
+    const userEmail = localStorage.getItem("MBox-Email");
     console.log(userEmail);
 
     const navigate = useHistory();
@@ -60,7 +61,9 @@ const MainPage = () => {
                     <ul className="space-y-4 mt-5">
 
                         <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">
-                            <FaEnvelopeOpenText className="mt-1" /> Inbox <span className="text-sm mt-1"> unread 45 </span>
+                            <NavLink to="/mainpage/inbox">
+                                <FaEnvelopeOpenText className="mt-1" /> Inbox <span className="text-sm mt-1"> unread 45 </span>
+                            </NavLink>
                         </li>
                         <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">
                             <GrSend className="mt-1" /> Sentbox
@@ -72,6 +75,9 @@ const MainPage = () => {
                     <Switch>
                         <Route path="/mainpage/compose">
                             <ComposeMail></ComposeMail>
+                        </Route>
+                        <Route path="/mainpage/inbox">
+                            <Inbox></Inbox>
                         </Route>
                     </Switch>
 

@@ -53,14 +53,14 @@ const SignIn = () => {
                 console.log("User have Successfully Sign-In", data);
                 navigate.push("/mainpage");
                 // // Saving of token and cleanEmail to get that specific user from the firebase rest api;
-                localStorage.setItem("MBox-Token", JSON.stringify(data.idToken));
+                localStorage.setItem("MBox-Token", data.idToken);
 
                 // const cleanEmail = data.email.replace(/[@.]/g, "");
                 // console.log(cleanEmail);
                 // // Here, the above cleanEmail function is made or written in the helpers.js file where all the functions are declared there with argument and wherever you can call the function and pass the parameters we will get the results;
                 const cleanEmail = formatEmail(data.email);
                 console.log(cleanEmail);
-                localStorage.setItem("MBox-Email", JSON.stringify(cleanEmail));
+                localStorage.setItem("MBox-Email", cleanEmail);
 
 
 
