@@ -1,3 +1,8 @@
+import { GrSend } from "react-icons/gr";
+import { FaEnvelopeOpenText } from "react-icons/fa";
+import ComposeMail from "../components/ComposeMail";
+import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { FaPencilAlt } from "react-icons/fa";
 import React from 'react'
@@ -43,27 +48,33 @@ const MainPage = () => {
             </div>
 
             <div className="flex flex-1 pt-28">
-                <div className="fixed top-28 left-0 overflow-auto float-left bg-slate-50 p-4 w-1.8/6 h-screen">
-                    <button
-                        className="bg-[#c026d3] text-white hover:bg-[#4ade80] rounded-3xl pl-7 pr-7 pt-5 pb-5 font-semibold shadow-lg hover:border-b-3 "
-                    >
-                        <center><FaPencilAlt size={20} /></center>
-                        Compose
-                    </button>
+                <div className="fixed top-28 left-0 overflow-auto float-left bg-slate-50 p-4 w-1/6 h-screen">
+                    <NavLink to="/mainpage/compose">
+                        <button
+                            className="bg-[#c026d3] text-white hover:bg-[#4ade80] rounded-3xl pl-7 pr-10 pt-5 pb-5 font-semibold shadow-lg hover:border-b-3 flex gap-3"
+                        >
+                            <center><FaPencilAlt size={20} /></center>
+                            Compose
+                        </button>
+                    </NavLink>
                     <ul className="space-y-4 mt-5">
 
-                        <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer">
-                            Inbox <span className="text-sm"> unread 45 </span>
+                        <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">
+                            <FaEnvelopeOpenText className="mt-1" /> Inbox <span className="text-sm mt-1"> unread 45 </span>
                         </li>
-                        <li className="font-semibold hover:border-b-2 cursor-pointer">
-                            Sentbox
+                        <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">
+                            <GrSend className="mt-1" /> Sentbox
                         </li>
                     </ul>
                 </div>
-                <div className=" p-6 float-right flex-1 pt-8 h-screen  bg-stone-300">
-                    <div className="w-[50%]">
-                        <h1> Rest of the content should  here. </h1>
-                    </div>
+                <div className=" p-6 float-right flex-1 pt-4 h-screen w-5/6 bg-stone-400">
+
+                    <Switch>
+                        <Route path="/mainpage/compose">
+                            <ComposeMail></ComposeMail>
+                        </Route>
+                    </Switch>
+
                 </div>
             </div>
         </div>
