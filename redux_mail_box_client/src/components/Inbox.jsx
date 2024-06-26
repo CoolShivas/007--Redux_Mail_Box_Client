@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 const Inbox = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     // // Getting the email address from the localStroage to confirm who is sending mail to whom;
     const senderEmail = localStorage.getItem("MBox-Email");
     console.log(senderEmail);
@@ -12,7 +14,7 @@ const Inbox = () => {
 
     useEffect(() => {
         const fetchInboxEmailFromServer = async () => {
-            // setIsLoading(true);
+            setIsLoading(true);
             try {
 
                 const response = await fetch(
@@ -34,6 +36,7 @@ const Inbox = () => {
                         ...data[key],
                     })
                 }
+                setIsLoading(false);
                 console.log(loadServerEmail);
                 setInboxMail(loadServerEmail); // // loadServerEmail is setted on the inboxMail state to be render using map;
 
@@ -47,19 +50,24 @@ const Inbox = () => {
         fetchInboxEmailFromServer();
     }, [senderEmail]);
 
-    console.log(inboxMail);
+    // console.log(inboxMail);
+
     return (
         <div className="bg-[#fef08a] flex justify-center items-center m-5 rounded-[8%]">
             <div className="m-4">
 
-                <h2 className="text-center font-bold">Inbox</h2>
-                {inboxMail.map((arr) => {
-                    return <li key={arr.id}>
+                <h2 className="text-center font-bold text-4xl border-b-8 border-green-500 mb-5 p-2">Inbox</h2>
+
+                {isLoading ? (<center><p className="font-bold bg-zinc-800 text-white rounded-full py-2"> Loading... </p></center>) : (inboxMail.map((arr) => {
+                    return <li key={arr.id}
+                        className="flex justify-between bg-cyan-200 rounded-lg mb-4 hover:shadow-2xl p-4 space-x-4"
+                    >
                         <p>From: {arr.to}</p>
                         <h3>Subject: {arr.subject}</h3>
                         <p>Message: {arr.contentBox}</p>
                     </li>
-                })}
+                }))}
+
             </div>
         </div>
     );
