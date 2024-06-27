@@ -18,11 +18,13 @@ const ComposeMail = () => {
 
     const handlerOnSubmitCompose = async (e) => {
         e.preventDefault();
+        const quillEditor = document.querySelector(".ql-editor");
+        const plainText = quillEditor.innerText;
 
         const sendComposeData = {
             to: to,
             subject: subject,
-            contentBox: contentBox,
+            contentBox: plainText,
         };
         console.log(sendComposeData);
 
