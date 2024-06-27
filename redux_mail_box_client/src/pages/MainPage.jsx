@@ -1,3 +1,5 @@
+import ReadSentbox from "../components/ReadSentbox";
+import ReadInbox from "../components/ReadInbox";
 import Sentbox from "../components/Sentbox";
 import Inbox from "../components/Inbox";
 import { GrSend } from "react-icons/gr";
@@ -79,11 +81,17 @@ const MainPage = () => {
                         <Route path="/mainpage/compose">
                             <ComposeMail></ComposeMail>
                         </Route>
-                        <Route path="/mainpage/inbox">
+                        <Route path="/mainpage/inbox" exact>
                             <Inbox></Inbox>
                         </Route>
-                        <Route path="/mainpage/sentbox">
+                        <Route path="/mainpage/sentbox" exact>
                             <Sentbox></Sentbox>
+                        </Route>
+                        <Route path="/mainpage/inbox/:emailId">
+                            <ReadInbox></ReadInbox>
+                        </Route>
+                        <Route path="/mainpage/sentbox/:emailId">
+                            <ReadSentbox></ReadSentbox>
                         </Route>
                     </Switch>
 

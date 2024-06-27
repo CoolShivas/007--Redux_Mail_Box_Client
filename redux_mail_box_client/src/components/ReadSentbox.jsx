@@ -1,0 +1,9 @@
+
+
+const ReadSentbox = () => {
+    return (
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis corrupti obcaecati, veniam, ipsa ex suscipit repellendus accusamus aperiam sunt nulla reprehenderit inventore libero optio quaerat ut, odit velit nobis architecto molestiae laborum itaque provident necessitatibus quo. Laborum praesentium atque, natus blanditiis sit neque tempore, minima eos quisquam officiis ullam quia placeat, voluptate quam accusamus ab. Beatae facilis porro aperiam corporis dicta cumque accusamus provident eligendi blanditiis reiciendis non cum magnam facere illum laboriosam, corrupti totam amet laudantium quidem, eum earum magni suscipit? Unde cum, optio, dolore iure veritatis, labore debitis voluptatem necessitatibus quibusdam porro odit accusantium molestias libero itaque consectetur. Officia quia sit eius facere quod commodi nostrum ex, dolore id nobis placeat mollitia nemo officiis. Explicabo cum dolore vitae in quaerat officia voluptates numquam consequuntur pariatur esse veritatis tempore, molestias placeat sit tenetur accusantium quidem sapiente, dolorum deserunt laborum. Distinctio placeat laudantium alias reiciendis molestias inventore qui provident laboriosam quae culpa iure voluptatem quaerat quis at aliquid doloremque repellendus dolore dignissimos ducimus, ad aperiam assumenda quo sequi! Placeat facilis vero impedit dolorem architecto molestias laudantium recusandae quos! Mollitia dolor voluptas excepturi nobis. Expedita eius porro quod sed! Fuga cumque consequuntur libero nisi hic dicta non nam neque, atque earum!</div>
+    )
+}
+
+export default ReadSentbox;

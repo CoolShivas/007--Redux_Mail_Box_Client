@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendingMails } from "../store/reduxStore";
@@ -68,13 +69,15 @@ const Sentbox = () => {
                 <h2 className="text-center font-bold text-4xl border-b-8 border-green-500 mb-5 p-2">Sentbox</h2>
 
                 {isLoading ? (<center><p className="font-bold bg-zinc-800 text-white rounded-full py-2"> Loading... </p></center>) : sentMail.length === 0 ? (<p className=" text-2xl"> Empty sentbox. </p>) : (sentMail.map((arr) => {
-                    return <li key={arr.id}
-                        className="flex justify-between bg-cyan-200 rounded-lg mb-4 hover:shadow-2xl p-4 space-x-4"
-                    >
-                        <p> To: {arr.to}</p>
-                        <h3> Subject: {arr.subject} </h3>
-                        <p> Message: {arr.contentBox} </p>
-                    </li>
+                    return <NavLink to={`/mainpage/sentbox/${arr.id}`} key={arr.id}>
+                        <li
+                            className="flex justify-between bg-cyan-200 rounded-lg mb-4 hover:shadow-2xl p-4 space-x-4 cursor-pointer"
+                        >
+                            <p> To: {arr.to}</p>
+                            <h3> Subject: {arr.subject} </h3>
+                            <p> Message: {arr.contentBox} </p>
+                        </li>
+                    </NavLink>
                 }))}
 
             </div>
