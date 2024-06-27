@@ -1,3 +1,4 @@
+import Sentbox from "../components/Sentbox";
 import Inbox from "../components/Inbox";
 import { GrSend } from "react-icons/gr";
 import { FaEnvelopeOpenText } from "react-icons/fa";
@@ -66,7 +67,9 @@ const MainPage = () => {
                             </NavLink>
                         </li>
                         <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">
-                            <GrSend className="mt-1" /> Sentbox
+                            <NavLink to="/mainpage/sentbox">
+                                <GrSend className="mt-1" /> Sentbox
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
@@ -78,6 +81,9 @@ const MainPage = () => {
                         </Route>
                         <Route path="/mainpage/inbox">
                             <Inbox></Inbox>
+                        </Route>
+                        <Route path="/mainpage/sentbox">
+                            <Sentbox></Sentbox>
                         </Route>
                     </Switch>
 
