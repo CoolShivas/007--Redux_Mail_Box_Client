@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendingMails } from "../store/reduxStore";
 
 
 const Inbox = () => {
+
+
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -9,8 +13,13 @@ const Inbox = () => {
     const senderEmail = localStorage.getItem("MBox-Email");
     console.log(senderEmail);
 
-    const [inboxMail, setInboxMail] = useState([]);
+    // const [inboxMail, setInboxMail] = useState([]);
     // Going to store the get mails from inbox server by api get call to this inboxMail Array;
+
+    const inboxMail = useSelector((store) => store.electronicMails.mails);
+    // Going to store the get mails from inbox server by api get call to this mails Array present in the reduxStore;
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchInboxEmailFromServer = async () => {
@@ -38,7 +47,10 @@ const Inbox = () => {
                 }
                 setIsLoading(false);
                 console.log(loadServerEmail);
-                setInboxMail(loadServerEmail); // // loadServerEmail is setted on the inboxMail state to be render using map;
+                // setInboxMail(loadServerEmail); // // loadServerEmail is setted on the inboxMail state to be render using map;
+                dispatch(sendingMails({
+                    mails: loadServerEmail
+                }));// // loadServerEmail is setted on the mails state to be render using map from the reduxStore;
 
 
 

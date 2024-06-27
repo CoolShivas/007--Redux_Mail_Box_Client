@@ -32,6 +32,7 @@ const authSlice = createSlice({
 const INITIAL_All_MAILS = {
   mails: [],
   receiversId: null,
+  sents: [],
 };
 
 const mailsSlice = createSlice({
@@ -41,6 +42,7 @@ const mailsSlice = createSlice({
     sendingMails: (state, action) => {
       state.mails = action.payload.mails;
       state.receiversId = action.payload.receiversId;
+      state.sents = action.payload.sents;
     },
   },
 });
