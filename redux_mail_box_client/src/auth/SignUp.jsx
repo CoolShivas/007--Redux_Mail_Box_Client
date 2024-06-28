@@ -11,7 +11,18 @@ const SignUp = () => {
     const [pass, setPass] = useState("");
     const [cnfPass, setCnfPass] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [passError, setPassError] = useState("");
+    // const [passError, setPassError] = useState("");
+    const [passMatch, setPassMatch] = useState(false);
+
+    const handlerOnConfirmPass = (e) => {
+        setCnfPass(e.target.value);
+        if (e.target.value === pass) {
+            setPassMatch(true);
+        }
+        else {
+            setPassMatch(false);
+        }
+    };
 
     const handlerOnSubmitSignUpForm = async (e) => {
         // // Preventing the screen from refreshing again and again on Submit;
@@ -125,13 +136,18 @@ const SignUp = () => {
                                 id="cnfpass"
                                 placeholder="enter and confirm your password"
                                 value={cnfPass}
-                                onChange={(e) => { setCnfPass(e.target.value) }}
+                                // onChange={(e) => { setCnfPass(e.target.value) }}
+                                onChange={handlerOnConfirmPass}
+
                             />
                         </div>
                     </div>
 
                     <div>
-                        {passError && <center><p className="text-red-500 font-bold mb-3"> {passError} </p></center>}
+                        {/* {passError && <center><p className="text-red-500 font-bold mb-3"> {passError} </p></center>} */}
+
+                        {passMatch && <center><p className="text-green-500 font-bold mb-3"> Password Matched </p></center>}
+                        {!passMatch && cnfPass.length > 0 && <center><p className="text-red-500 font-bold mb-3"> Password Not Matched </p></center>}
 
                         {isLoading ? (<center><p className="font-bold bg-blue-200 py-2"> Loading... </p></center>) : (<button
                             type="submit"
