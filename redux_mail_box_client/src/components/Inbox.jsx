@@ -2,7 +2,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendingMails } from "../store/reduxStore";
+import { sendingMails, setDeleteMails } from "../store/reduxStore";
 
 
 const Inbox = () => {
@@ -64,6 +64,19 @@ const Inbox = () => {
         return () => fetchInboxEmailFromServer();
     }, [senderEmail]);
 
+
+    const handlerOnDeleteBtn = async (arr) => {
+        try {
+            const res = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/inbox/${arr}.json`, {
+                method: "DELETE"
+            });
+            dispatch(setDeleteMails(arr));
+
+        } catch (error) {
+            console.log("Error occur in inbox delete", error.message);
+        }
+    };
+
     // console.log(inboxMail);
 
     return (
@@ -83,10 +96,9 @@ const Inbox = () => {
                                 <p>From: {arr.to}</p>
                                 <h3>Subject: {arr.subject}</h3>
                                 <p>Message: {arr.contentBox}</p>
-                                <button onClick={() => console.log("Deleted")}>Delete</button>
                             </div>
                         </NavLink>
-                        <button onClick={() => console.log("Deleted")}>
+                        <button onClick={() => handlerOnDeleteBtn(arr.id)}>
                             <AiTwotoneDelete size={"25px"} className="h-8 w-8 rounded-full hover:h-10 w-10 hover:bg-red-500" />
                         </button>
                     </li>

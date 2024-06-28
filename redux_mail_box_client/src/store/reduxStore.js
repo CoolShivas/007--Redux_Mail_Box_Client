@@ -44,6 +44,12 @@ const mailsSlice = createSlice({
       state.receiversId = action.payload.receiversId;
       state.sents = action.payload.sents;
     },
+    setDeleteMails: (state, action) => {
+      state.mails = state.mails.filter((crr) => crr.id !== action.payload);
+    },
+    setDeleteSents: (state, action) => {
+      state.sents = state.sents.filter((drr) => drr.id !== action.payload);
+    },
   },
 });
 
@@ -63,6 +69,7 @@ export const { setLogIn, setLogOut } = authSlice.actions;
 // // Ending of Authentication Actions Function-----------------------------------------------
 
 // // Starting of Authentication Actions Function-----------------------------------------------
-export const { sendingMails } = mailsSlice.actions;
+export const { sendingMails, setDeleteMails, setDeleteSents } =
+  mailsSlice.actions;
 // // Ending of Authentication Actions Function-----------------------------------------------
 export default reduxStore;
