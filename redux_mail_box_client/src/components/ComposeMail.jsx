@@ -21,13 +21,6 @@ const ComposeMail = () => {
         const quillEditor = document.querySelector(".ql-editor");
         const plainText = quillEditor.innerText;
 
-        const sendComposeData = {
-            to: to,
-            subject: subject,
-            contentBox: plainText,
-        };
-        console.log(sendComposeData);
-
         // // Getting the email address from the localStroage to confirm who is sending mail to whom;
         const senderEmail = localStorage.getItem("MBox-Email");
         console.log(senderEmail);
@@ -35,6 +28,14 @@ const ComposeMail = () => {
         // // Here, with the help of formatEmail function we are able to clean email address i.e, already written in the helpers file;
         const receiverCleanEmail = formatEmail(to);
         console.log(receiverCleanEmail);
+
+        const sendComposeData = {
+            to: to,
+            subject: subject,
+            contentBox: plainText,
+            senderEmail: senderEmail,
+        };
+        console.log(sendComposeData);
 
         try {
             const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`, {
@@ -74,7 +75,7 @@ const ComposeMail = () => {
             console.log("Email send successfully", response);
             dispatch(sendingMails({
                 mails: data,
-                receiversId: to,
+                id: to,
             }));
 
         } catch (error) {

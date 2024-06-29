@@ -85,10 +85,10 @@ const Sentbox = () => {
                 {sentMail.length === 0 && (<p className=" text-2xl"> Empty sentbox. </p>)}
 
                 {isLoading ? (<center><p className="font-bold bg-zinc-800 text-white rounded-full py-2"> Loading... </p></center>) : (sentMail.map((arr) => {
-                    return <li
+                    return <li key={arr.id}
                         className="flex justify-between bg-cyan-200 rounded-lg mb-4 hover:shadow-2xl p-4 space-x-4 cursor-pointer"
                     >
-                        <NavLink to={`/mainpage/sentbox/${arr.id}`} key={arr.id}>
+                        <NavLink to={`/mainpage/sentbox/${arr.id}`}>
                             <div>
                                 <p> To: {arr.to}</p>
                                 <h3> Subject: {arr.subject} </h3>
