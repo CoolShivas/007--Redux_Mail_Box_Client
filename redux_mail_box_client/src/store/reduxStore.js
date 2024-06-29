@@ -33,6 +33,7 @@ const INITIAL_All_MAILS = {
   mails: [],
   receiversId: null,
   sents: [],
+  unReadInbox: null,
 };
 
 const mailsSlice = createSlice({
@@ -49,6 +50,9 @@ const mailsSlice = createSlice({
     },
     setDeleteSents: (state, action) => {
       state.sents = state.sents.filter((drr) => drr.id !== action.payload);
+    },
+    setMakeAsUnReadInbox: (state, action) => {
+      state.unReadInbox = action.payload;
     },
   },
 });
@@ -69,7 +73,11 @@ export const { setLogIn, setLogOut } = authSlice.actions;
 // // Ending of Authentication Actions Function-----------------------------------------------
 
 // // Starting of Authentication Actions Function-----------------------------------------------
-export const { sendingMails, setDeleteMails, setDeleteSents } =
-  mailsSlice.actions;
+export const {
+  sendingMails,
+  setDeleteMails,
+  setDeleteSents,
+  setMakeAsUnReadInbox,
+} = mailsSlice.actions;
 // // Ending of Authentication Actions Function-----------------------------------------------
 export default reduxStore;

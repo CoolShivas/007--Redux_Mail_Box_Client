@@ -34,6 +34,7 @@ const ComposeMail = () => {
             subject: subject,
             contentBox: plainText,
             senderEmail: senderEmail,
+            read: false,
         };
         console.log(sendComposeData);
 

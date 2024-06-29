@@ -2,7 +2,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendingMails, setDeleteMails } from "../store/reduxStore";
+import { sendingMails, setDeleteMails, setMakeAsUnReadInbox } from "../store/reduxStore";
 
 
 const Inbox = () => {
@@ -77,6 +77,21 @@ const Inbox = () => {
         }
     };
 
+    const handlerOnMakeAsRead = async (arr) => {
+        try {
+            const res = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox/${arr.id}.json`, {
+                method: "PATCH",
+                body: JSON.stringify({
+                    read: true
+                })
+            });
+            dispatch(setMakeAsUnReadInbox(arr.id));
+
+        } catch (error) {
+            console.log("Error occur in inbox delete", error.message);
+        }
+    };
+
     // console.log(inboxMail);
 
     return (
@@ -92,10 +107,17 @@ const Inbox = () => {
                         className="flex justify-between bg-cyan-200 rounded-lg mb-4 hover:shadow-2xl p-4 space-x-4 cursor-pointer"
                     >
                         <NavLink to={`/mainpage/inbox/${arr.id}`}>
-                            <div>
-                                <p>From: {arr.senderEmail}</p>
-                                <h3>Subject: {arr.subject}</h3>
-                                <p>Message: {arr.contentBox}</p>
+                            <div
+                                className="flex items-center gap-2"
+                                onClick={() => handlerOnMakeAsRead(arr)}
+                            >
+                                {!arr.read && <span className="flex h-3 w-3 bg-red-500 rounded-full m-3"></span>}
+
+                                <div>
+                                    <p>From: {arr.senderEmail}</p>
+                                    <h3>Subject: {arr.subject}</h3>
+                                    <p>Message: {arr.contentBox}</p>
+                                </div>
                             </div>
                         </NavLink>
                         <button onClick={() => handlerOnDeleteBtn(arr.id)}>
