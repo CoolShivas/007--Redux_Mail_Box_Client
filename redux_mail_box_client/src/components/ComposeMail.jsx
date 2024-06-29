@@ -54,6 +54,7 @@ const ComposeMail = () => {
             dispatch(sendingMails({
                 mails: data,
                 receiversId: to,
+                sents: data,
             }));
 
 
@@ -77,6 +78,7 @@ const ComposeMail = () => {
             dispatch(sendingMails({
                 mails: data,
                 id: to,
+                sents: data,
             }));
 
         } catch (error) {

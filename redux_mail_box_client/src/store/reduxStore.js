@@ -45,8 +45,20 @@ const mailsSlice = createSlice({
       state.receiversId = action.payload.receiversId;
       state.sents = action.payload.sents;
     },
+    setMails: (state, action) => {
+      state.mails = action.payload;
+      state.unReadInbox = state.mails
+        .filter((err) => !err.read)
+        .map((frr) => frr.id);
+    },
+    setSents: (state, action) => {
+      state.sents = action.payload;
+    },
     setDeleteMails: (state, action) => {
       state.mails = state.mails.filter((crr) => crr.id !== action.payload);
+      state.unReadInbox = state.unReadInbox.filter(
+        (grr) => grr.id !== action.payload
+      );
     },
     setDeleteSents: (state, action) => {
       state.sents = state.sents.filter((drr) => drr.id !== action.payload);
@@ -78,6 +90,8 @@ export const {
   setDeleteMails,
   setDeleteSents,
   setMakeAsUnReadInbox,
+  setMails,
+  setSents,
 } = mailsSlice.actions;
 // // Ending of Authentication Actions Function-----------------------------------------------
 export default reduxStore;

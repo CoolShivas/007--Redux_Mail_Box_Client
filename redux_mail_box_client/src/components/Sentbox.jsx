@@ -2,7 +2,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendingMails, setDeleteSents } from "../store/reduxStore";
+import { sendingMails, setDeleteSents, setSents } from "../store/reduxStore";
 
 const Sentbox = () => {
 
@@ -47,10 +47,10 @@ const Sentbox = () => {
                 setIsLoading(false);
                 console.log(loadServerEmail);
                 // setSentMail(loadServerEmail); // // loadServerEmail is setted on the inboxMail state to be render using map;
-                dispatch(sendingMails({
-                    sents: loadServerEmail,
-                }));// // loadServerEmail is setted on the sents state to be render using map from the reduxStore;
-
+                // dispatch(sendingMails({
+                //     sents: loadServerEmail,
+                // }));// // loadServerEmail is setted on the sents state to be render using map from the reduxStore;
+                dispatch(setSents(loadServerEmail));
 
 
             } catch (error) {
