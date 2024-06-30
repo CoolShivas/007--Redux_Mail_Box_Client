@@ -67,7 +67,7 @@ const MainPage = () => {
 
                         <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">
                             <NavLink to="/mainpage/inbox">
-                                <FaEnvelopeOpenText className="mt-1" /> Inbox <span className="text-sm mt-1"> unread 45 </span>
+                                <FaEnvelopeOpenText className="mt-1" /> Inbox <span className="text-sm mt-1"> unread {unReadInbox.length} </span>
                             </NavLink>
                         </li>
                         <li className="font-semibold hover:border-b-2 space-x-2 cursor-pointer flex ml-2 gap-2">

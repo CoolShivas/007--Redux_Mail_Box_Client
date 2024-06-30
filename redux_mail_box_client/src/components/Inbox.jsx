@@ -61,7 +61,16 @@ const Inbox = () => {
             }
 
         };
-        fetchInboxEmailFromServer();
+        // fetchInboxEmailFromServer();
+
+        // Setting up the time to update or Keep calling the backend api every 2 seconds from the frontend and get the list of mails.
+        const intervalID = setTimeout(() => {
+            fetchInboxEmailFromServer();
+        }, 2000);
+
+        // Cleaning up the intervalId if not in use;
+        return () => clearInterval(intervalID);
+
     }, [getGotEmail]);
 
 
