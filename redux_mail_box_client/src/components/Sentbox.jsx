@@ -58,7 +58,7 @@ const Sentbox = () => {
             }
 
         };
-        return () => fetchSentboxEmailFromServer();
+        fetchSentboxEmailFromServer();
     }, [senderEmail]);
 
 

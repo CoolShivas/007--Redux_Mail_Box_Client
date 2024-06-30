@@ -1,7 +1,7 @@
 import { sendingMails } from "../store/reduxStore";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
 import { formatEmail } from "../config/helpers/helpers";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 
 
 const ComposeMail = () => {
+
+    const navigate = useHistory();
 
     const dispatch = useDispatch();
 
@@ -84,10 +86,7 @@ const ComposeMail = () => {
         } catch (error) {
             console.log(error.message);
         }
-
-
-
-
+        navigate.replace("/mainpage");
         setTo("");
         setSubject("");
         setContentBox("");

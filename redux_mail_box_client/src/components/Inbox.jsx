@@ -61,7 +61,7 @@ const Inbox = () => {
             }
 
         };
-        return () => fetchInboxEmailFromServer();
+        fetchInboxEmailFromServer();
     }, [getGotEmail]);
 
 
