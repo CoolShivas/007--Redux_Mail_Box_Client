@@ -1,3 +1,4 @@
+// import useFetch from "../config/helpers/useFetch";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
@@ -64,14 +65,14 @@ const Inbox = () => {
         // fetchInboxEmailFromServer();
 
         // Setting up the time to update or Keep calling the backend api every 2 seconds from the frontend and get the list of mails.
-        const intervalID = setTimeout(() => {
+        const intervalID = setInterval(() => {
             fetchInboxEmailFromServer();
         }, 2000);
 
         // Cleaning up the intervalId if not in use;
         return () => clearInterval(intervalID);
 
-    }, [getGotEmail]);
+    }, [getGotEmail, inboxMail]);
 
 
     const handlerOnDeleteBtn = async (arr) => {
@@ -111,7 +112,7 @@ const Inbox = () => {
 
                 {/* {inboxMail.length === 0 && (<p className=" text-2xl"> Empty inbox. </p>)} */}
 
-                {isLoading ? (<center><p className="font-bold bg-zinc-800 text-white rounded-full py-2"> Loading... </p></center>) : inboxMail.length === 0 ? (<p className=" text-2xl"> Empty inbox. </p>) : (inboxMail.map((arr) => {
+                {isLoading ? (<center><p className="font-bold bg-zinc-800 text-white rounded-full py-2"> Loading... </p></center>) : inboxMail.length === 0 ? (<p className=" text-2xl"> Empty inbox. </p>) : (inboxMail?.map((arr) => {
                     return <li key={arr.id}
                         className="flex justify-between bg-cyan-200 rounded-lg mb-4 hover:shadow-2xl p-4 space-x-4 cursor-pointer"
                     >
