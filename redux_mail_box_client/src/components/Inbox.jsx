@@ -1,4 +1,4 @@
-// import useFetch from "../config/helpers/useFetch";
+import useFetch from "../config/helpers/useFetch";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ const Inbox = () => {
 
 
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     // // Getting the email address from the localStroage to confirm who is sending mail to whom;
     const getGotEmail = localStorage.getItem("MBox-Email");
@@ -24,55 +24,68 @@ const Inbox = () => {
 
     const dispatch = useDispatch();
 
+    // useEffect(() => {
+    //     const fetchInboxEmailFromServer = async () => {
+    //         setIsLoading(true);
+    //         try {
+
+    //             const response = await fetch(
+    //                 `https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox.json`
+    //             );
+
+    //             if (!response.ok) {
+    //                 throw new Error("Unable to fetch inbox email from server");
+    //             }
+
+    //             const data = await response.json();
+    //             console.log(data); // Getting the data;
+
+    //             const loadServerEmail = [];
+
+    //             for (const key in data) {
+    //                 loadServerEmail.push({
+    //                     id: key,
+    //                     ...data[key],
+    //                 })
+    //             }
+    //             setIsLoading(false);
+    //             console.log(loadServerEmail);
+    //             // setInboxMail(loadServerEmail); // // loadServerEmail is setted on the inboxMail state to be render using map;
+    //             // dispatch(sendingMails({
+    //             //     mails: loadServerEmail
+    //             // }));// // loadServerEmail is setted on the mails state to be render using map from the reduxStore;
+    //             dispatch(setMails(loadServerEmail));
+
+
+    //         } catch (error) {
+    //             console.log("Something went wrong inbox emails", error);
+    //         }
+
+    //     };
+    //     // fetchInboxEmailFromServer();
+
+    //     // Setting up the time to update or Keep calling the backend api every 2 seconds from the frontend and get the list of mails.
+    //     const intervalID = setInterval(() => {
+    //         fetchInboxEmailFromServer();
+    //     }, 2000);
+
+    //     // Cleaning up the intervalId if not in use;
+    //     return () => clearInterval(intervalID);
+
+    // }, [getGotEmail, inboxMail]);
+
+
+    // // Starting of using Custom Hook :----------------
+
+    const { data, isLoading } = useFetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox.json`);
+
     useEffect(() => {
-        const fetchInboxEmailFromServer = async () => {
-            setIsLoading(true);
-            try {
+        if (data) {
+            dispatch(setMails(data));
+        }
+    }, [data, dispatch]);
 
-                const response = await fetch(
-                    `https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox.json`
-                );
-
-                if (!response.ok) {
-                    throw new Error("Unable to fetch inbox email from server");
-                }
-
-                const data = await response.json();
-                console.log(data); // Getting the data;
-
-                const loadServerEmail = [];
-
-                for (const key in data) {
-                    loadServerEmail.push({
-                        id: key,
-                        ...data[key],
-                    })
-                }
-                setIsLoading(false);
-                console.log(loadServerEmail);
-                // setInboxMail(loadServerEmail); // // loadServerEmail is setted on the inboxMail state to be render using map;
-                // dispatch(sendingMails({
-                //     mails: loadServerEmail
-                // }));// // loadServerEmail is setted on the mails state to be render using map from the reduxStore;
-                dispatch(setMails(loadServerEmail));
-
-
-            } catch (error) {
-                console.log("Something went wrong inbox emails", error);
-            }
-
-        };
-        // fetchInboxEmailFromServer();
-
-        // Setting up the time to update or Keep calling the backend api every 2 seconds from the frontend and get the list of mails.
-        const intervalID = setInterval(() => {
-            fetchInboxEmailFromServer();
-        }, 2000);
-
-        // Cleaning up the intervalId if not in use;
-        return () => clearInterval(intervalID);
-
-    }, [getGotEmail, inboxMail]);
+    // // Ending of using Custom Hook :----------------
 
 
     const handlerOnDeleteBtn = async (arr) => {
