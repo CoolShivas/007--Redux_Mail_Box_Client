@@ -41,7 +41,7 @@ const ComposeMail = () => {
         console.log(sendComposeData);
 
         try {
-            const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`, {
+            const response = await fetch(`https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`, {
                 method: "POST",
                 body: JSON.stringify(sendComposeData)
             });
@@ -65,7 +65,7 @@ const ComposeMail = () => {
         }
 
         try {
-            const response = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${receiverCleanEmail}/inbox.json`, {
+            const response = await fetch(`https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${receiverCleanEmail}/inbox.json`, {
                 method: "POST",
                 body: JSON.stringify(sendComposeData)
             });

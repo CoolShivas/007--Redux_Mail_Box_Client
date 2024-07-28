@@ -39,7 +39,7 @@ const SignUp = () => {
                     throw new Error("Please fill all the fields for signup");
                 }
 
-                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBE0s_zEOQLHxzklg47lVyJDi-CIN60n1k`, {
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA1Tn1Swki91X0nZJ5vRaBDCAN42EUt5lw`, {
                     method: "POST",
                     body: JSON.stringify({
                         email: mail,

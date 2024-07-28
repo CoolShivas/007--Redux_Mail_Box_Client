@@ -26,7 +26,7 @@ const Sentbox = () => {
             try {
 
                 const response = await fetch(
-                    `https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`
+                    `https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox.json`
                 );
 
                 if (!response.ok) {
@@ -64,7 +64,7 @@ const Sentbox = () => {
 
     const handlerOnDeleteBtn = async (arr) => {
         try {
-            const res = await fetch(`https://reduxmailbox-45445-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox/${arr}.json`, {
+            const res = await fetch(`https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${senderEmail}/sendbox/${arr}.json`, {
                 method: "DELETE"
             });
             dispatch(setDeleteSents(arr));

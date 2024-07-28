@@ -27,7 +27,7 @@ const SignIn = () => {
                 if (!mail || !pass) {
                     throw new Error("Please fill all the fields for Sign-In");
                 }
-                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBE0s_zEOQLHxzklg47lVyJDi-CIN60n1k`, {
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1Tn1Swki91X0nZJ5vRaBDCAN42EUt5lw`, {
                     method: "POST",
                     body: JSON.stringify({
                         email: mail,
