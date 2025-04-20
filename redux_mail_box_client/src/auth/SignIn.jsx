@@ -27,7 +27,7 @@ const SignIn = () => {
                 if (!mail || !pass) {
                     throw new Error("Please fill all the fields for Sign-In");
                 }
-                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1Tn1Swki91X0nZJ5vRaBDCAN42EUt5lw`, {
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBk8H4S3ULj9rklvOmU0FmV_OKRToLFiOA`, {
                     method: "POST",
                     body: JSON.stringify({
                         email: mail,
@@ -78,11 +78,6 @@ const SignIn = () => {
     return (<>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img
-                    className="mx-auto h-10 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
-                />
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     Sign-In
                 </h2>

@@ -77,7 +77,7 @@ const Inbox = () => {
 
     // // Starting of using Custom Hook :----------------
 
-    const { data, isLoading } = useFetch(`https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox.json`);
+    const { data, isLoading } = useFetch(`https://mailboxclient-ad1a1-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox.json`);
 
     useEffect(() => {
         if (data) {
@@ -90,7 +90,7 @@ const Inbox = () => {
 
     const handlerOnDeleteBtn = async (arr) => {
         try {
-            const res = await fetch(`https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox/${arr}.json`, {
+            const res = await fetch(`https://mailboxclient-ad1a1-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox/${arr}.json`, {
                 method: "DELETE"
             });
             dispatch(setDeleteMails(arr));
@@ -102,7 +102,7 @@ const Inbox = () => {
 
     const handlerOnMakeAsRead = async (arr) => {
         try {
-            const res = await fetch(`https://mailboxclient-52b31-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox/${arr.id}.json`, {
+            const res = await fetch(`https://mailboxclient-ad1a1-default-rtdb.firebaseio.com/boxMail/${getGotEmail}/inbox/${arr.id}.json`, {
                 method: "PATCH",
                 body: JSON.stringify({
                     read: true
